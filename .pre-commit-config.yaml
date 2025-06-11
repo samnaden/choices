@@ -13,5 +13,9 @@ repos:
     rev: v1.10.0
     hooks:
       - id: mypy
-        additional_dependencies: ["sqlalchemy", "psycopg[binary]"]
-        args: ["--install-types", "--non-interactive"]
+        additional_dependencies: [ "sqlalchemy", "psycopg[binary]" ]
+        args:
+          - "--install-types"
+          - "--non-interactive"
+          - "--config-file=mypy.ini"
+          - "--package-root=app"
