@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome</h1>
+    <form action="/" method="post">
+        <label for="name">What is your name?</label>
+        <input type="text" id="name" name="name" placeholder="your name" required>
+
+        <div style="margin-top: 1rem;">
+            <button type="submit" name="action" value="ask" disabled>Ask</button>
+            <button type="submit" name="action" value="answer" disabled>Answer</button>
+        </div>
+    </form>
+
+    <script>
+        const nameInput = document.getElementById('name');
+        const buttons = document.querySelectorAll('button');
+
+        nameInput.addEventListener('input', () => {
+            const hasValue = nameInput.value.trim().length > 0;
+            buttons.forEach(btn => btn.disabled = !hasValue);
+        });
+    </script>
+{% endblock %}

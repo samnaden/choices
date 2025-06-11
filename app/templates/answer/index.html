@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi {{ name }}, here are some questions that need answering.</h1>
+    <p>[ Placeholder for question content ]</p>
+    <form method="post" action="/answer">
+        <input type="hidden" name="name" value="{{ name }}">
+        <input type="text" name="answer" placeholder="Your answer" required>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
