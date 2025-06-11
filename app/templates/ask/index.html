@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>What do you need answered?</h1>
+    <form method="post" action="/ask">
+        <input type="hidden" name="name" value="{{ name }}">
+        <input type="text" name="question" placeholder="your question" required>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
