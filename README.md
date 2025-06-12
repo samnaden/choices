@@ -1,10 +1,28 @@
 # choices
 As E-40 once said: "Everybody got choices." What will you choose?
 
-# TODO
-- use a cookie to track user session (or something else besides passing name along the flow)
-- CI/CD e.g. use github actions to build a tagged docker image and push it somewhere
-- think about testing and act on those thoughts if needed
-- get the actual DB model and app flow going e.g. providing multiple choice options for a posed question and rendering actual saved questions
-- add a location element when presenting questions for the visitor to answer, that is, present questions based on proximity to user
-- have actual login credentials for visitors to the site and associate an alias with each user that can be updated
+## Running Locally
+- create a python virtual env, 3.10 <= python_version < 3.13
+- activate virtual env
+- run the below
+  - ```commandline
+    pip install poetry==2.1.3
+    poetry config virtualenvs.create false
+    poetry install
+    pre-commit install
+    ```
+- `docker-compose down -v`
+- `docker-compose up -d`
+- `export DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/choices && alembic upgrade head`
+- `export PYTHONPATH=. && export DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/choices && python3 ./app/db/seed/local_dummy.py`
+- `export DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/choices && poetry run uvicorn app.main:app --reload`
+
+## APPLICATION TODO
+- Persist questions in the DB.
+- Use a cookie to track user session (or at least something else besides passing name along the flow).
+- Add a cleanup job to remove visitors and their questions that are over a day old.
+- Add a location element to show questions to visitors ranked by proximity.
+
+## INFRA TODO
+- Get this deployed somewhere.
+- Once deployment to a cloud vendor has been proved out, use GH actions to accomplish it.
