@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Form, Request
+from fastapi import APIRouter, Depends, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.responses import Response
@@ -32,7 +32,7 @@ async def handle_home(
             "ask/index.html", {"request": request, "name": info.name}
         )
     elif info.action == "answer":
-        return templates.TemplateResponse(
-            "answer/index.html", {"request": request, "name": info.name}
+        return RedirectResponse(
+            url=f"/answer?name={info.name}", status_code=status.HTTP_303_SEE_OTHER
         )
     return RedirectResponse("/", status_code=303)

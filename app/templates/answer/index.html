@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi {{ name }}, here are some questions that need answering.</h1>
-    <p>[ Placeholder for question content ]</p>
-    <form method="post" action="/answer">
-        <input type="hidden" name="name" value="{{ name }}">
-        <input type="text" name="answer" placeholder="Your answer" required>
-        <button type="submit">Submit</button>
-    </form>
+  <h1>Hi {{ name or 'friend' }}, here are some questions that need answering.</h1>
+
+  <form method="post" action="/answer">
+    <input type="hidden" name="name" value="{{ name }}">
+
+    {% for question in questions %}
+      <div class="question-block">
+        <p>
+          <strong>{{ question.text }}</strong><br>
+          <em>Posted by {{ question.visitor.name }}</em>
+        </p>
+
+        {% for answer in question.answers | sort(attribute="rank") %}
+          <label>
+            <input
+              type="radio"
+              name="question_{{ question.id }}"
+              value="{{ answer.id }}">
+            {{ answer.text }} ({{ answer.votes }})
+          </label><br>
+        {% endfor %}
+
+        <hr>
+      </div>
+    {% endfor %}
+
+    <button type="submit">Submit Answers</button>
+  </form>
 {% endblock %}
