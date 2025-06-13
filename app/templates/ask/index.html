@@ -4,7 +4,28 @@
     <h1>What do you need answered?</h1>
     <form method="post" action="/ask">
         <input type="hidden" name="name" value="{{ name }}">
+
+        <p><strong>Your question:</strong></p>
         <input type="text" name="question" placeholder="your question" required>
+
+        <p><strong>Options:</strong></p>
+        <div id="options-container">
+            <input type="text" name="options" placeholder="Option 1" required>
+        </div>
+
+        <button type="button" onclick="addOption()">Add another option</button><br><br>
+
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        function addOption() {
+            const container = document.getElementById("options-container");
+            const input = document.createElement("input");
+            input.type = "text";
+            input.name = "options";
+            input.placeholder = "Another option";
+            container.appendChild(input);
+        }
+    </script>
 {% endblock %}
