@@ -18,7 +18,6 @@ As E-40 once said: "Everybody got choices." What will you choose?
 - `export DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5432/choices && poetry run uvicorn app.main:app --reload`
 
 ## APPLICATION TODO
-- Persist questions in the DB.
 - Use a cookie to track user session (or at least something else besides passing name along the flow).
 - Add a cleanup job to remove visitors and their questions that are over a day old.
 - Add a location element to show questions to visitors ranked by proximity.
